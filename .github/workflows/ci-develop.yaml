@@ -1,0 +1,21 @@
+name: CI Pipeline for Develop Branch
+on:
+  pull_request:
+    branches:
+      - develop
+    types:
+      - opened
+      - synchronize
+jobs:
+  linting-develop-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Lint HTML Files With HTMLHint
+        run: npx htmlhint "**/*.html"
+
+      - name: Lint CSS Files With Stylelint
+        run: npx stylelint "**/*.css"
